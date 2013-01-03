@@ -15,4 +15,6 @@ urlpatterns = format_suffix_patterns(urlpatterns)
 urlpatterns += patterns('',
     url(r'^api-auth/', include('rest_framework.urls',
                                namespace='rest_framework'))
+    url(r'^$', 'api_root'),
+    url(r'^snippets/(?P<pk>[0-9]+)/highlight/$', views.SnippetHighlight.as_view()),
 )

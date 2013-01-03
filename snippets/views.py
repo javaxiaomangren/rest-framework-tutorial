@@ -36,6 +36,15 @@ class SnippetDetail(generics.RetrieveUpdateDestroyAPIView):
         obj.owner = self.request.user
 
 
+class SnippetHighlight(generics.SingleObjectAPIView):
+    model = Snippet
+    renderer_classes = (renderers.StaticHTMLRenderer,)
+
+    def get(self, request, *args, **kwargs):
+        snippet = self.get_object()
+        return Response(snippet.highlighted)
+
+
 class UserList(generics.ListAPIView):
     model = User
     serializer_class = UserSerializer
