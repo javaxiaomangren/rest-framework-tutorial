@@ -7,10 +7,16 @@ class SnippetList(generics.ListCreateAPIView):
     model = Snippet
     serializer_class = SnippetSerializer
 
+    def pre_save(self, obj):
+        obj.owner = self.request.user
+
 
 class SnippetDetail(generics.RetrieveUpdateDestroyAPIView):
     model = Snippet
     serializer_class = SnippetSerializer
+
+    def pre_save(self, obj):
+        obj.owner = self.request.user
 
 
 class UserList(generics.ListAPIView):
