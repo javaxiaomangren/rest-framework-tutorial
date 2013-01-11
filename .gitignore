@@ -1,0 +1,5 @@
+# Database content will be handled by fixtures
+*.db
+
+# Accept these files in the repository
+!.gitignore
