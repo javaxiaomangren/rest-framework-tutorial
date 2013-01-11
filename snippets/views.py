@@ -11,6 +11,19 @@ from snippets.serializers import SnippetSerializer, UserSerializer
 
 @api_view(('GET',))
 def api_root(request, format=None):
+    """
+    This is the entry point for the API described in the
+    [REST framework tutorial][tutorial].
+
+    Follow the hyperinks each resource offers to explore the API.
+
+    Note that you can also explore the API from the command line, for instance
+    using the `curl` command-line tool.
+
+    For example: `curl -X GET http://restframework.herokuapp.com/ -H "Accept: application/json; indent=4"`
+
+    [tutorial]: http://django-rest-framework.org/tutorial/1-serialization.html
+    """
     return Response({
         'users': reverse('user-list', request=request, format=format),
         'snippets': reverse('snippet-list', request=request, format=format)
@@ -18,6 +31,16 @@ def api_root(request, format=None):
 
 
 class SnippetList(generics.ListCreateAPIView):
+    """
+    This view presents a list of code snippets, and allows new snippets to
+    be created.
+
+    Try it yourself by logging in as one of these four users: **amy**, **max**,
+    **jose** or **aziz** - The passwords are the same as the usernames.
+
+    Note that code snippets are paginated to a maximum of 10 per page,
+    and the maximum number of code snippets is capped at 100 instances.
+    """
     model = Snippet
     serializer_class = SnippetSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
@@ -27,6 +50,17 @@ class SnippetList(generics.ListCreateAPIView):
 
 
 class SnippetDetail(generics.RetrieveUpdateDestroyAPIView):
+    """
+    This view presents an instance of a code snippet.
+
+    The `highlight` field presents a hyperlink to the hightlighted HTML
+    representation of the code snippet.
+
+    The **owner** of the code snippet may update or delete this instance.
+
+    Try it yourself by logging in as one of these four users: **amy**, **max**,
+    **jose** or **aziz** - The passwords are the same as the usernames.
+    """
     model = Snippet
     serializer_class = SnippetSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,
@@ -46,10 +80,19 @@ class SnippetHighlight(generics.SingleObjectAPIView):
 
 
 class UserList(generics.ListAPIView):
+    """
+    This view presents a list of all the users in the system.
+
+    As you can see, related snippet instances are serialized using a
+    hyperlinked representation.
+    """
     model = User
     serializer_class = UserSerializer
 
 
 class UserInstance(generics.RetrieveAPIView):
+    """
+    This view presents a instance of one of the users in the system.
+    """
     model = User
     serializer_class = UserSerializer
