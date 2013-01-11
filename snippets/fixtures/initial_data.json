@@ -1,0 +1,15 @@
+[
+   {
+	"pk": 1,
+	"model": "snippets.snippet",
+	"fields": {
+		"style": "friendly",
+		"code": "print \"hello, world\"\n",
+		"language": "python",
+		"title": "",
+		"created": "2013-01-01T00:00:00.000Z",
+		"linenos": false
+		}
+	},
+	
+]
