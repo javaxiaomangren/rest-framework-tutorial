@@ -1,10 +1,15 @@
 from django.conf.urls import patterns, include, url
+from rest_framework.urlpatterns import format_suffix_patterns
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 # admin.autodiscover()
 
-urlpatterns = patterns('',
+urlpatterns = format_suffix_patterns(patterns('snippets.views',
+    url(r'^$', 'api_root'),
+))
+
+urlpatterns += patterns('',
     # Examples:
     # url(r'^$', 'tutorial.views.home', name='home'),
     # url(r'^tutorial/', include('tutorial.foo.urls')),
